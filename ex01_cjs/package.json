@@ -1,0 +1,19 @@
+{
+  "name": "ex01_cjs",
+  "version": "1.0.0",
+  "description": "",
+  "license": "ISC",
+  "author": "",
+  "type": "commonjs",
+  "main": "index.cjs",
+  "scripts": {
+    "start": "node index.cjs",
+    "debug": "nodemon index.cjs"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.14"
+  },
+  "dependencies": {
+    "dotenv": "^17.3.1"
+  }
+}

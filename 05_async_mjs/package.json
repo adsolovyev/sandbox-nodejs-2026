@@ -1,0 +1,16 @@
+{
+  "name": "ex05_async_mjs",
+  "version": "1.0.0",
+  "description": "",
+  "license": "ISC",
+  "author": "",
+  "type": "module",
+  "main": "index.mjs",
+  "scripts": {
+    "start": "node index.mjs",
+    "debug": "nodemon index.mjs"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.14"
+  }
+}
