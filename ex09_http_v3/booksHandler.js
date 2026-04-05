@@ -12,7 +12,7 @@ export const booksHandler = (req, res) => {
     // console.log('urlArr', urlArr, urlArr.length);
     let id = null;
     if (urlArr.length === 4) {
-        const id = +urlArr[urlArr.length-1]; // FIXME:
+        id = +urlArr[urlArr.length - 1]; // FIXME:
     }
 
     let re = null;

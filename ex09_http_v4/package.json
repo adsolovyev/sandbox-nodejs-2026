@@ -1,0 +1,17 @@
+{
+  "name": "ex09_http",
+  "version": "1.0.0",
+  "description": "",
+  "license": "ISC",
+  "author": "",
+  "type": "module",
+  "main": "index.mjs",
+  "scripts": {
+    "start": "node index.js",
+    "debug": "nodemon index.js",
+    "debugDB": "nodemon --ignore db dataSourceDebug.js"
+  },
+  "dependencies": {
+    "nodemon": "^3.1.14"
+  }
+}
