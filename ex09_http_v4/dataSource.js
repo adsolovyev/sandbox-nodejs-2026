@@ -47,18 +47,23 @@ export default class DataSource {
     }
 
     create(payload) {
-        if (!(payload.hasOwnProperty('name') 
-            && payload.hasOwnProperty('title') 
+        if (!(
+            payload.hasOwnProperty('name') 
+            && payload.hasOwnProperty('author') 
             && payload.hasOwnProperty('description'))){
             throw new Error('DB:Create - Wrong Payload');
         }
 
-        // новой записи в БД нужно присвоить id. Пусть будет простой способ - посчитать все элементы в базе 
-        let id = 1 + Math.max(...this.storage.map((item) => item.id));
+        let id = 0;
+        if(!this.storage.length) {
+            id++;
+        } else {
+            id = 1 + Math.max(...this.storage.map((itm) => itm.id));
+        }
 
         // проверка на дубликаты
-        const found = this.storage.find((item) => {
-            return item.id === id;
+        const found = this.storage.find((itm) => {
+            return itm.id === id;
         });
         if (found) {
             throw new Error('DB - Inconsistent database!');
@@ -67,7 +72,7 @@ export default class DataSource {
         const newItem = {
             id,
             name: payload.name,
-            title: payload.title,
+            author: payload.author,
             description: payload.description
         };
         // непосредственно пуш новой записи
