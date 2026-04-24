@@ -5,12 +5,16 @@
   "type": "module",
   "scripts": {
     "start": "node ./bin/www",
-    "debug": "set DEBUG=ex10-express:* && node ./bin/www"
+    "debug": "set DEBUG=ex10-express:* && nodemon ./bin/www"
   },
   "dependencies": {
+    "body-parser": "^2.2.2",
     "cookie-parser": "~1.4.4",
     "debug": "~2.6.9",
     "express": "~4.16.1",
     "morgan": "~1.9.1"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.14"
   }
 }
