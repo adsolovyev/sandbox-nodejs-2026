@@ -1,4 +1,5 @@
-import ds from "../dataSources/dataSourceJSON.js";
+// import ds from "../dataSources/dataSourceJSON.js"
+import ds from "../dataSources/dataSourceSQLPostgres.js";
 
 class BooksController {
 
@@ -8,67 +9,81 @@ class BooksController {
 
     create = (req, res, next) => {
         const body = req.body;
-        try {
-            const re = this.ds.create(body);
-            res.status(201).send(re);
-        } catch (e) {
+        this.ds.create(body).then((resp) => {
+            res.status(201).send({
+                status: 'success',
+                data: resp[0],
+            });
+        }).catch((err) => {
             res.status(500).send({
                 status: "error",
-                message: e.toString()
+                message: err.toString()
             });
-        }
+        });
     }
 
     getAll = (req, res, next) => {
-        try {
-            const re = this.ds.getAll();
-            res.status(200).send(re);
-        } catch (e) {
+        this.ds.getAll().then((resp) => {
+            res.status(200).send({
+                status: 'success',
+                data: resp[0],
+            });
+        }).catch((err) => {
             res.status(500).send({
                 status: "error",
-                message: e.toString()
+                message: err.toString()
             });
-        }
+        });
     }
 
     getOne = (req, res, next) => {
         const id = +req.params.id;
-        try {
-            res.status(200).send(this.ds.getOne(id));
-        } catch (e) {
+        this.ds.getOne(id).then((resp) => {
+            res.status(200).send({
+                status: 'success',
+                data: resp[0][0],
+            });
+        }).catch((err) => {
             res.status(500).send({
                 status: "error",
-                message: e.toString()
+                message: err.toString()
             });
-        }
-
+        });
     }
 
     update = (req, res) => {
         const body = req.body;
         const id = +req.params.id;
-        try {
-            this.ds.update(id, body);
-            res.status(200).send(this.ds.getOne(id));
-        } catch (e) {
+        this.ds.update(id, body).then(() => {
+            this.ds.getOne(id).then((resp) => {
+                res.status(201).send({
+                    status: 'success',
+                    data: resp[0][0],
+                });
+            }).catch((err) => {
+                res.status(500).send({
+                    status: "error",
+                    message: err.toString()
+                });
+            });
+        }).catch((err) => {
             res.status(500).send({
                 status: "error",
-                message: e.toString()
+                message: err.toString()
             });
-        }
+        });
     }
 
     delete = (req, res, next) => {
         const id = +req.params.id;
-        try {
-            this.ds.delete(id);
+        this.ds.delete(id).then((resp) => {
             res.status(204).send(null);
-        } catch (e) {
+        }).catch((err) => {
             res.status(500).send({
                 status: "error",
-                message: e.toString()
+                message: err.toString()
             });
-        }
+        });
     }
 }
 
