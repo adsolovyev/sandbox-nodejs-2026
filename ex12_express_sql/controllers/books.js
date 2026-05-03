@@ -1,5 +1,5 @@
-// import ds from "../dataSources/dataSourceJSON.js"
-import ds from "../dataSources/dataSourceSQLPostgres.js";
+// import ds from "../datasources/dataSourceJSON.js";
+import ds from "../datasources/dataSourceSQLPostgres.js";
 
 class BooksController {
 
@@ -38,6 +38,7 @@ class BooksController {
 
     getOne = (req, res, next) => {
         const id = +req.params.id;
+
         this.ds.getOne(id).then((resp) => {
             res.status(200).send({
                 status: 'success',
@@ -54,7 +55,9 @@ class BooksController {
     update = (req, res) => {
         const body = req.body;
         const id = +req.params.id;
+
         this.ds.update(id, body).then(() => {
+
             this.ds.getOne(id).then((resp) => {
                 res.status(201).send({
                     status: 'success',
