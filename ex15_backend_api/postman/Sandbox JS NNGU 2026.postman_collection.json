@@ -1,0 +1,177 @@
+{
+  "info": {
+    "_postman_id": "48db3736-6593-4689-b1ff-93eb00ec05c0",
+    "name": "Sandbox JS NNGU 2026",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "44006312"
+  },
+  "item": [
+    {
+      "name": "Books",
+      "item": [
+        {
+          "name": "([C]reate) Создать книгу",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "  {\r\n    \"author\": \"Иван Тургенев\",\r\n    \"title\": \"Отцы и дети\",\r\n    \"description\": \"Роман о конфликте поколений, разворачивающийся вокруг нигилиста Базарова, отвергающего традиционные ценности, и дворян Кирсановых.\"\r\n  }",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{url}}/api/books",
+              "host": [
+                "{{url}}"
+              ],
+              "path": [
+                "api",
+                "books"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "([R]ead) Получить все книги",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{url}}/api/books",
+              "host": [
+                "{{url}}"
+              ],
+              "path": [
+                "api",
+                "books"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "([R]etrieve) Получить книгу по id",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{url}}/api/books/{{id}}",
+              "host": [
+                "{{url}}"
+              ],
+              "path": [
+                "api",
+                "books",
+                "{{id}}"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "([U]pdate (Patch)) Обновить книгу по id",
+          "request": {
+            "method": "PATCH",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"author\": \"Достоевский Ф.М.\",\r\n    \"description\": \"Это произведение перешло в общественное достояние.\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{url}}/api/books/{{id}}",
+              "host": [
+                "{{url}}"
+              ],
+              "path": [
+                "api",
+                "books",
+                "{{id}}"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "([U]pdate (Put)) Обновить книгу по id",
+          "request": {
+            "method": "PUT",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"title\": \"Отцы и дети !\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{url}}/api/books/{{id}}",
+              "host": [
+                "{{url}}"
+              ],
+              "path": [
+                "api",
+                "books",
+                "{{id}}"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "([D]elete) Удалить книгу по id",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{url}}/api/books/{{id}}",
+              "host": [
+                "{{url}}"
+              ],
+              "path": [
+                "api",
+                "books",
+                "{{id}}"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Users",
+      "item": [
+        {
+          "name": "([R]ead) Получить всех пользователей",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{url}}/api/users",
+              "host": [
+                "{{url}}"
+              ],
+              "path": [
+                "api",
+                "users"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    }
+  ]
+}

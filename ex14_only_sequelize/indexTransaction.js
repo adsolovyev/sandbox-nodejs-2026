@@ -1,5 +1,15 @@
-import {successTransaction, failedTransaction} from "./transactions.js";
+import sequelize from './db.js';
+import { successTransaction, failedTransaction } from "./transactions.js";
 
-await successTransaction();
+async function start() {
+    try {
+        await sequelize.authenticate();
+        await successTransaction();
+        // await failedTransaction();
 
-// await failedTransaction();
+    } catch (e) {
+        console.error(e);
+    }
+}
+
+start();
