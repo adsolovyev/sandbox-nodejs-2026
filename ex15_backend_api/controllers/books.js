@@ -1,8 +1,14 @@
-import { Book } from '../db/models.js';
+import { Book, UserRole } from '../db/models.js';
 
 class BooksController {
 
     create = (req, res, next) => {
+
+        // Авторизация - добавить логику проверки наличия у пользователя роли admin или manager
+        return res.status(406).json({
+            error: 'FIXME: User user does not have roles admin or manager (add authorization!)',
+        });
+
         const body = req.body;
         // FIXME: validation ?
         Book.create(body).then((newBook) => {
@@ -19,11 +25,25 @@ class BooksController {
     }
 
     getAll = (req, res, next) => {
-        Book.findAll().then((books) => {
-            res.status(200).send({
-                status: 'success',
-                data: books,
-            });
+        // Авторизация -- выделение полномочий! Т.е. можно выдавать список книг только пользователям с хотябы одной ролью!
+        UserRole.findAll({ where: { userId: req.user.id } }).then((rolesRef) => {
+            if (rolesRef.length > 0) {
+                Book.findAll().then((books) => {
+                    res.status(200).send({
+                        status: 'success',
+                        data: books,
+                    });
+                }).catch((err) => {
+                    res.status(500).send({
+                        status: "error",
+                        message: err.toString()
+                    });
+                });
+            } else {
+                return res.status(406).json({
+                    error: 'User user does not have any roles',
+                });
+            }
         }).catch((err) => {
             res.status(500).send({
                 status: "error",
@@ -33,12 +53,26 @@ class BooksController {
     }
 
     getOne = (req, res, next) => {
-        const id = +req.params.id;
-        Book.findByPk(id).then((book) => {
-            res.status(200).send({
-                status: 'success',
-                data: book,
-            });
+        // Авторизация -- выделение полномочий! Т.е. можно выдавать список книг только пользователям с хотябы одной ролью!
+        UserRole.findAll({ where: { userId: req.user.id } }).then((rolesRef) => {
+            if (rolesRef.length > 0) {
+                const id = +req.params.id;
+                Book.findByPk(id).then((book) => {
+                    res.status(200).send({
+                        status: 'success',
+                        data: book,
+                    });
+                }).catch((err) => {
+                    res.status(500).send({
+                        status: "error",
+                        message: err.toString()
+                    });
+                });
+            } else {
+                return res.status(406).json({
+                    error: 'User user does not have any roles',
+                });
+            }
         }).catch((err) => {
             res.status(500).send({
                 status: "error",
@@ -48,11 +82,20 @@ class BooksController {
     }
 
     update = (req, res) => {
+
+        // Авторизация - добавить логику проверки наличия у пользователя роли admin или manager
+        return res.status(406).json({
+            error: 'FIXME: User user does not have roles admin or manager (add authorization!)',
+        });
+
+
         const body = req.body;
         const id = +req.params.id;
-        Book.update(body, {where: {
-            id: id
-        }}).then((updBook) => {
+        Book.update(body, {
+            where: {
+                id: id
+            }
+        }).then((updBook) => {
             res.status(201).send({
                 status: 'success',
                 data: updBook,
@@ -66,10 +109,18 @@ class BooksController {
     }
 
     delete = (req, res, next) => {
+
+        // Авторизация - добавить логику проверки наличия у пользователя роли admin или manager
+        return res.status(406).json({
+            error: 'FIXME: User user does not have roles admin or manager (add authorization!)',
+        });
+
         const id = +req.params.id;
-        Book.destroy({where: {
-            id: id
-        }}).then(() => {
+        Book.destroy({
+            where: {
+                id: id
+            }
+        }).then(() => {
             res.status(204).send(null);
         }).catch((err) => {
             res.status(500).send({
