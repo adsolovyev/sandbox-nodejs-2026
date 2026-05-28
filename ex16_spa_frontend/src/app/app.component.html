@@ -1,0 +1,33 @@
+
+<button class="my-btn" type="button" (click)="onLogIn($event)" >Log In</button>
+<button class="my-btn" type="button" (click)="onLogOut()" >Log Out</button>
+<br />
+<b>Auth result:</b>
+<pre>{{result | json}}</pre>
+
+<hr />
+
+<b>Список книг:</b>
+
+<table border="1" cellpadding="5" cellspacing="0">
+  <thead>
+  <tr>
+    <td>id</td>
+    <td>title</td>
+    <td>author</td>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let book of books">
+    <td>{{book.id}}</td>
+    <td>{{book.title}}</td>
+    <td>{{book.author}}</td>
+  </tr>
+  </tbody>
+</table>
+<br />
+<br />
+<b>Books list errors:</b>
+<pre>{{result2 | json}}</pre>
+
+<router-outlet />
